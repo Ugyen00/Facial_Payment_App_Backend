@@ -26,7 +26,7 @@ cloudinary.config(
 
 # MongoDB connection
 client = os.getenv("MONGO_URI")
-db = os.getenv("MONGO_DB_NAME")
+db = client["face_db"]
 faces_collection = db["faces"]
 
 # Train model using in-memory collected face images
