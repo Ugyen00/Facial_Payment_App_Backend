@@ -9,21 +9,24 @@ import cloudinary.uploader
 from pymongo import MongoClient
 from io import BytesIO
 from shared_state import last_detected_user
-
+from dotenv import load_dotenv
 
 MODEL_PATH = 'facenet_model.pkl'
 CASCADE_PATH = 'haarcascade_frontalface_default.xml'
 
+# Load environment variables
+load_dotenv()
+
 # Configure Cloudinary
 cloudinary.config(
-    cloud_name="dlkwnifqq",
-    api_key="499632844969664",
-    api_secret="bvBlTmoc096zxaih8LfDGd67qSs"
+    cloud_name=os.getenv("CLOUDINARY_CLOUD_NAME"),
+    api_key=os.getenv("CLOUDINARY_API_KEY"),
+    api_secret=os.getenv("CLOUDINARY_API_SECRET")
 )
 
 # MongoDB connection
-client = MongoClient("mongodb+srv://12220095gcit:oqL5RVZuCoZBmMAO@cluster0.xhyenda.mongodb.net/")
-db = client["face_db"]
+client = os.getenv("MONGO_URI")
+db = os.getenv("MONGO_DB_NAME")
 faces_collection = db["faces"]
 
 # Train model using in-memory collected face images
