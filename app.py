@@ -458,5 +458,6 @@ def debug_database():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == '__main__':
+    port = int(os.environ.get("PORT", 5000))  # default to 5000 for local dev
     print("Starting Flask app with debug mode...")
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=port, debug=True)

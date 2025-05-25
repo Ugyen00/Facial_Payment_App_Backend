@@ -25,7 +25,8 @@ cloudinary.config(
 )
 
 # MongoDB connection
-client = os.getenv("MONGO_URI")
+mongo_uri = os.getenv("MONGO_URI")
+client = MongoClient(mongo_uri)  # ✅ correct usage
 db = client["face_db"]
 faces_collection = db["faces"]
 
